@@ -1,0 +1,42 @@
+CREATE TABLE USER(
+NID varchar(13),
+Name varchar(30),
+Destination varchar(10),
+Contact char(11),
+Email varchar(48),
+primary key(NID));
+
+CREATE TABLE ADMIN(
+Admin_ID char(8),
+Name varchar(30),
+Password varchar(64),
+primary key(Admin_ID));
+
+CREATE TABLE ISSUES(
+NID varchar(13),
+Date date,
+Subject varchar(16),
+Description varchar(200),
+primary key(NID),
+foreign key(NID) references USER(NID));
+
+
+
+CREATE TABLE TRANSPORT(
+Transport_No char(10),
+Company_Name varchar(30),
+Timing TIME(0),
+Chosen_Transport varchar(5),
+NID varchar(13),
+primary key(NID,Transport_No),
+foreign key(NID) references USER(NID));
+
+CREATE TABLE TICKETS(
+Ticket_No varchar(12),
+Date date,
+Ticket_Amount int,
+NID varchar(13),
+Transport_No char(10),
+primary key(NID,Transport_No,Ticket_No),
+foreign key(NID) references USER(NID),
+foreign key(Transport_No) references TRANSPORT(Transport_No));
